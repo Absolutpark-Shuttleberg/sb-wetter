@@ -1,0 +1,56 @@
+# Shuttleberg Wetterwarte · Light
+# Stündlich: Open-Meteo-Daten aus AWS Open Data + GeoSphere + LWD Salzburg holen, Engine rechnen,
+# web/light (wetter-light.js, public.json, Vorschau) als statische Dateien zu Cloudflare hochladen.
+# Geht ein Schritt schief, wird nichts hochgeladen: online bleibt der letzte gute Stand.
+# Benötigte Repo-Secrets: CLOUDFLARE_API_TOKEN (Vorlage „Edit Cloudflare Workers“), CLOUDFLARE_ACCOUNT_ID
+name: Wetter aktualisieren
+
+on:
+  schedule:
+    - cron: "7 * * * *"   # stündlich um xx:07 UTC (GitHub startet geplante Läufe teils verspätet)
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+concurrency:
+  group: wetter
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      HAS_CF: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "26"
+
+      - name: Python-Pakete
+        run: pip install -r requirements.txt
+
+      - name: Daten holen und rechnen
+        run: PYTHON=python scripts/build.sh
+
+      - name: Hinweis, falls Cloudflare-Secrets fehlen
+        if: env.HAS_CF != 'true'
+        run: echo "::notice::CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID fehlen noch – gerechnet, aber nichts hochgeladen."
+
+      - name: Zu Cloudflare hochladen
+        if: env.HAS_CF == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.160.1"

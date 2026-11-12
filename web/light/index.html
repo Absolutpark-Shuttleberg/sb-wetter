@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Wetter &amp; Schnee · Vorschau</title>
+<!-- Nur für die Vorschau. Auf shuttleberg.com ist Josefin Sans bereits selbst gehostet. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap">
+<style>
+  body{margin:0;background:#fff;font-family:'Josefin Sans',Helvetica,Arial,sans-serif;color:#232629}
+  .mock{background:#0f5aa1;height:64px;display:flex;align-items:center;justify-content:center;gap:24px;padding:0 16px}
+  .mock img{height:30px;filter:brightness(0) invert(1)}
+  .mock nav{display:flex;gap:18px;color:#fff;font-weight:700;font-size:14px;text-transform:uppercase}
+  .mock nav span:last-child{color:#fcc40d}
+  .crumb{background:#f3f3f3;font-size:13px;color:#5d6872;padding:10px 16px;text-align:center}
+  .container{max-width:1140px;margin:0 auto;padding:40px 16px 64px}
+  .dev{position:fixed;right:12px;bottom:12px;background:#232629;color:#fff;font:600 13px/1.2 system-ui,sans-serif;padding:8px 10px;display:flex;gap:8px;align-items:center;z-index:9;opacity:.92}
+  .dev a{color:#fcc40d;text-decoration:none}
+  .dev a.on{color:#fff;text-decoration:underline}
+  @media (max-width:700px){.mock nav{display:none}}
+</style>
+</head>
+<body>
+<div class="mock" aria-hidden="true"><img src="preview/sb-logo.png" alt=""><nav><span>Skigebiet</span><span>Familie</span><span>Events</span><span>Tickets</span><span>Info &amp; Service</span></nav></div>
+<div class="crumb" aria-hidden="true">Info &amp; Service › Wetter &amp; Schneehöhe</div>
+
+<main class="container">
+  <!-- So sieht der Einbau im XMS-HTML-Block aus: -->
+  <div id="sb-wetter"></div>
+</main>
+
+<div class="dev">Vorschau: <a href="?" id="dLive">Live-Daten</a> · <a href="?demo=1" id="dDemo">Lawinen-Demo (März 2026)</a></div>
+<script>
+  (function(){var demo=/[?&]demo=1/.test(location.search);
+    document.getElementById(demo?'dDemo':'dLive').className='on';
+    document.getElementById('sb-wetter').setAttribute('data-src',demo?'public-demo.json':'public.json');})();
+</script>
+<!-- Vorschau-Seite, nicht für Gäste: Auf shuttleberg.com kommt nur der Einbau-Code (div + script) in einen HTML-Block. -->
+<script src="wetter-light.js" defer></script>
+</body>
+</html>

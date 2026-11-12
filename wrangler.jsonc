@@ -1,0 +1,12 @@
+// Shuttleberg Wetterwarte · Light auf Cloudflare Workers (nur statische Dateien, kein Worker-Code)
+// Hochgeladen wird web/light: wetter-light.js (Einbau-Skript), public.json (Daten), index.html (Vorschau).
+// Statische Dateien sind im Gratis-Plan kostenlos und unbegrenzt. Header (CORS, noindex) in web/light/_headers.
+{
+  "$schema": "https://unpkg.com/wrangler@4.160.1/config-schema.json",
+  "name": "sb-wetter",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./web/light"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "sourceHtml": "../../Apps/Shuttleberg Wetterwarte/Shuttleberg-Wetterwarte.html",
+  "points": {
+    "berg": [47.300, 13.345, 1950],
+    "tal": [47.3007, 13.3966, 1000]
+  },
+  "snowReport": {
+    "berg": null,
+    "tal": null,
+    "lastSnowfall": null,
+    "updated": null,
+    "note": "PLATZHALTER: offizielle Schneehöhen Berg/Tal und letzter Schneefall. Quelle klären (Pistenchef, Ski-amade-/Intermaps-Feed oder manuell)."
+  },
+  "links": {
+    "avalanche": "https://lawine.salzburg.at/",
+    "webcams": "https://www.shuttleberg.com/de/info-service/webcams/",
+    "lifts": "https://www.shuttleberg.com/de/info-service/geoeffnete-pisten-lifte/"
+  }
+}

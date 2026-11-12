@@ -1,0 +1,73 @@
+{
+ "erzeugt": "2026-11-12T13:34:57.154Z",
+ "quellen": [
+  {
+   "quelle": "Open-Meteo-Daten · Einzelmodelle (Berg)",
+   "ok": true,
+   "info": "AWS Open Data"
+  },
+  {
+   "quelle": "Open-Meteo-Daten · Modelle Tal",
+   "ok": true,
+   "info": "AWS Open Data"
+  },
+  {
+   "quelle": "Open-Meteo-Daten · ICON-EPS",
+   "ok": true,
+   "info": "AWS Open Data"
+  },
+  {
+   "quelle": "Open-Meteo-Daten · ECMWF ENS",
+   "ok": true,
+   "info": "AWS Open Data"
+  },
+  {
+   "quelle": "Lawinenwarndienst Salzburg (LAWIS)",
+   "ok": true,
+   "info": "noch kein Bericht veröffentlicht"
+  },
+  {
+   "quelle": "GeoSphere · INCA-Analyse 1 km",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "quelle": "GeoSphere · C-LAEF 1 km",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "quelle": "GeoSphere · AROME 1 km",
+   "ok": true,
+   "info": ""
+  }
+ ],
+ "openMeteo": {
+  "abgerufen": "2026-11-12T13:34:56+00:00",
+  "dauer_s": 14.4,
+  "modelle": [
+   "icon_d2",
+   "italia_meteo_arpae_icon_2i",
+   "meteofrance_arome_france_hd",
+   "icon_eu",
+   "meteofrance_arpege_europe",
+   "ecmwf_ifs",
+   "ecmwf_aifs025_single",
+   "ukmo_global_deterministic_10km",
+   "gfs_seamless",
+   "gem_seamless",
+   "ecmwf_ifs025_ensemble"
+  ],
+  "fehlend": {
+   "geosphere_arome_austria": "im Bucket seit 06.11. nicht aktuell (AROME 1 km kommt direkt von GeoSphere)",
+   "meteoswiss_icon_ch1": "gedrehtes Gitter, noch nicht umgesetzt",
+   "meteoswiss_icon_ch2": "gedrehtes Gitter, noch nicht umgesetzt",
+   "dmi_harmonie_arome_europe": "Lambert-Projektion, noch nicht umgesetzt",
+   "icon_d2_eps": "Member nur auf nativem ICON-Gitter im Bucket",
+   "icon_eu_eps": "Member nur auf nativem ICON-Gitter im Bucket",
+   "ecmwf_aifs025": "Member nur auf N320-Gitter im Bucket, noch nicht umgesetzt",
+   "gfs025": "GEFS-Member nicht im Bucket"
+  },
+  "log": []
+ }
+}

@@ -1,0 +1,18 @@
+/*
+  X-Robots-Tag: noindex, nofollow
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/public.json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
+/public-demo.json
+  Access-Control-Allow-Origin: *
+
+/status.json
+  Cache-Control: no-cache
+
+/wetter-light.js
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=600

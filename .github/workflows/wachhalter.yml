@@ -1,0 +1,31 @@
+# GitHub pausiert geplante Workflows in öffentlichen Repos nach 60 Tagen ohne Aktivität.
+# Einmal im Monat: Ist der letzte Commit älter als 30 Tage, kommt ein leerer Commit dazu.
+# (Commits mit dem GITHUB_TOKEN starten keine weiteren Workflows.)
+name: Wachhalter
+
+on:
+  schedule:
+    - cron: "23 4 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Leerer Commit, falls nötig
+        run: |
+          last=$(git log -1 --format=%ct)
+          now=$(date +%s)
+          if [ $(( (now - last) / 86400 )) -ge 30 ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit --allow-empty -m "Wachhalter: geplante Läufe aktiv halten"
+            git push
+          else
+            echo "Letzter Commit jünger als 30 Tage, nichts zu tun."
+          fi

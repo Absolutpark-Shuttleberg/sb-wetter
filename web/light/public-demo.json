@@ -1,0 +1,376 @@
+{
+ "generated": "2026-11-12T13:23:18.453Z",
+ "elev": {
+  "berg": 1950,
+  "tal": 1000
+ },
+ "now": {
+  "berg": {
+   "t": 1794484800,
+   "T": 6.8,
+   "W": 7,
+   "src": "analyse",
+   "G": 18
+  },
+  "tal": {
+   "t": 1794484800,
+   "T": 8.4,
+   "W": 4,
+   "src": "analyse"
+  },
+  "today": {
+   "icon": "overcast",
+   "text": "bedeckt"
+  },
+  "snowLine": 2000
+ },
+ "snow": {
+  "new24": 0,
+  "new48": 0,
+  "next": {
+   "key": "2026-11-13",
+   "wd": "Fr",
+   "d": 13,
+   "m": 11,
+   "cm": 12,
+   "powder": false
+  },
+  "sum7": 32,
+  "official": {
+   "berg": null,
+   "tal": null,
+   "lastSnowfall": null,
+   "updated": null,
+   "note": "PLATZHALTER: offizielle Schneehöhen Berg/Tal und letzter Schneefall. Quelle klären (Pistenchef, Ski-amade-/Intermaps-Feed oder manuell)."
+  }
+ },
+ "days": [
+  {
+   "key": "2026-11-12",
+   "wd": "Do",
+   "d": 12,
+   "m": 11,
+   "icon": "overcast",
+   "text": "bedeckt",
+   "parts": [
+    {
+     "icon": "overcast",
+     "text": "bedeckt",
+     "lab": "vorm."
+    },
+    {
+     "icon": "rain",
+     "text": "Regen",
+     "lab": "nachm."
+    },
+    {
+     "icon": "sleet",
+     "text": "Schneeregen",
+     "lab": "nachts"
+    }
+   ],
+   "berg": {
+    "max": 7,
+    "min": 2
+   },
+   "tal": {
+    "max": 11,
+    "min": 4
+   },
+   "snow": 0,
+   "snowMorning": 0,
+   "snowLine": 2000,
+   "snowLineWet": true,
+   "rain": 5,
+   "gust": 19
+  },
+  {
+   "key": "2026-11-13",
+   "wd": "Fr",
+   "d": 13,
+   "m": 11,
+   "icon": "snow",
+   "text": "Schneefall",
+   "parts": [
+    {
+     "icon": "snow-heavy",
+     "text": "Starker Schneefall",
+     "lab": "vorm."
+    },
+    {
+     "icon": "overcast",
+     "text": "bedeckt",
+     "lab": "nachm."
+    },
+    {
+     "icon": "partly-night",
+     "text": "teils bewölkt",
+     "lab": "nachts"
+    }
+   ],
+   "berg": {
+    "max": 2,
+    "min": -9
+   },
+   "tal": {
+    "max": 8,
+    "min": -2
+   },
+   "snow": 12,
+   "snowMorning": 12,
+   "snowLine": 900,
+   "snowLineWet": true,
+   "rain": 6,
+   "gust": 40
+  },
+  {
+   "key": "2026-11-14",
+   "wd": "Sa",
+   "d": 14,
+   "m": 11,
+   "icon": "sun",
+   "text": "sonnig",
+   "parts": [
+    {
+     "icon": "sun",
+     "text": "sonnig",
+     "lab": "vorm."
+    },
+    {
+     "icon": "sun",
+     "text": "sonnig",
+     "lab": "nachm."
+    },
+    {
+     "icon": "moon",
+     "text": "klar",
+     "lab": "nachts"
+    }
+   ],
+   "berg": {
+    "max": 0,
+    "min": -10
+   },
+   "tal": {
+    "max": 8,
+    "min": -4
+   },
+   "snow": 0,
+   "snowMorning": 0,
+   "snowLine": 500,
+   "snowLineWet": false,
+   "rain": 0,
+   "gust": 22
+  },
+  {
+   "key": "2026-11-15",
+   "wd": "So",
+   "d": 15,
+   "m": 11,
+   "icon": "partly",
+   "text": "heiter bis wolkig",
+   "parts": [
+    {
+     "icon": "partly",
+     "text": "heiter bis wolkig",
+     "lab": "vorm."
+    },
+    {
+     "icon": "sun",
+     "text": "sonnig",
+     "lab": "nachm."
+    },
+    {
+     "icon": "overcast",
+     "text": "bewölkt",
+     "lab": "nachts"
+    }
+   ],
+   "berg": {
+    "max": 2,
+    "min": -6
+   },
+   "tal": {
+    "max": 9,
+    "min": -2
+   },
+   "snow": 6,
+   "snowMorning": 0,
+   "snowLine": 1400,
+   "snowLineWet": false,
+   "rain": 0,
+   "gust": 24
+  },
+  {
+   "key": "2026-11-16",
+   "wd": "Mo",
+   "d": 16,
+   "m": 11,
+   "icon": "overcast",
+   "text": "bedeckt",
+   "parts": [
+    {
+     "icon": "overcast",
+     "text": "bedeckt",
+     "lab": "vorm."
+    },
+    {
+     "icon": "overcast",
+     "text": "bedeckt",
+     "lab": "nachm."
+    },
+    {
+     "icon": "overcast",
+     "text": "bewölkt",
+     "lab": "nachts"
+    }
+   ],
+   "berg": {
+    "max": 3,
+    "min": -4
+   },
+   "tal": {
+    "max": 10,
+    "min": 0
+   },
+   "snow": 2,
+   "snowMorning": 0,
+   "snowLine": 1200,
+   "snowLineWet": false,
+   "rain": 0,
+   "gust": 30
+  },
+  {
+   "key": "2026-11-17",
+   "wd": "Di",
+   "d": 17,
+   "m": 11,
+   "icon": "overcast",
+   "text": "bedeckt",
+   "parts": [
+    {
+     "icon": "overcast",
+     "text": "bedeckt",
+     "lab": "vorm."
+    },
+    {
+     "icon": "overcast",
+     "text": "bedeckt",
+     "lab": "nachm."
+    },
+    {
+     "icon": "snow",
+     "text": "Schneefall",
+     "lab": "nachts"
+    }
+   ],
+   "berg": {
+    "max": 2,
+    "min": -4
+   },
+   "tal": {
+    "max": 8,
+    "min": 1
+   },
+   "snow": 3,
+   "snowMorning": 4,
+   "snowLine": 1900,
+   "snowLineWet": true,
+   "rain": 0,
+   "gust": 24
+  },
+  {
+   "key": "2026-11-18",
+   "wd": "Mi",
+   "d": 18,
+   "m": 11,
+   "icon": "snow",
+   "text": "Schneefall",
+   "parts": [
+    {
+     "icon": "snow",
+     "text": "Schneefall",
+     "lab": "vorm."
+    },
+    {
+     "icon": "snow",
+     "text": "Schneefall",
+     "lab": "nachm."
+    },
+    {
+     "icon": "overcast",
+     "text": "bewölkt",
+     "lab": "nachts"
+    }
+   ],
+   "berg": {
+    "max": 1,
+    "min": -4
+   },
+   "tal": {
+    "max": 8,
+    "min": 1
+   },
+   "snow": 9,
+   "snowMorning": 4,
+   "snowLine": 1500,
+   "snowLineWet": true,
+   "rain": 0,
+   "gust": 33
+  }
+ ],
+ "avalanche": {
+  "url": "https://lawine.salzburg.at/",
+  "region": "Niedere Tauern Nord",
+  "status": "ok",
+  "demo": "2026-03-05",
+  "max": 2,
+  "maxWord": "mäßig",
+  "ratings": [
+   {
+    "level": 1,
+    "word": "gering",
+    "elev": "unterhalb 2.000 m",
+    "period": ""
+   },
+   {
+    "level": 2,
+    "word": "mäßig",
+    "elev": "oberhalb 2.000 m",
+    "period": ""
+   }
+  ],
+  "problems": [
+   {
+    "type": "persistent_weak_layers",
+    "word": "Altschnee",
+    "elev": "oberhalb 2.000 m"
+   }
+  ],
+  "headline": "Schwacher Altschnee bleibt die Hauptgefahr",
+  "text": "Die Lawinengefahr ist ab der Waldgrenze mäßig, darunter gering. An wenigen Stellen können vor allem in den erweiterten Nordexpositionen mittlere Schneebrettlawinen durch einzelne Personen ausgelöst werden, dies besonders an den Übergängen von wenig zu mehr …",
+  "tendency": "steady",
+  "validFrom": "2026-03-04T16:00:00Z",
+  "validTo": "2026-03-05T16:00:00Z",
+  "published": "2026-03-04T16:00:00Z"
+ },
+ "links": {
+  "avalanche": "https://lawine.salzburg.at/",
+  "webcams": "https://www.shuttleberg.com/de/info-service/webcams/",
+  "lifts": "https://www.shuttleberg.com/de/info-service/geoeffnete-pisten-lifte/"
+ },
+ "credits": [
+  {
+   "text": "GeoSphere Austria",
+   "url": "https://data.hub.geosphere.at/"
+  },
+  {
+   "text": "Weather data by Open-Meteo.com",
+   "url": "https://open-meteo.com/"
+  },
+  {
+   "text": "Lawinenwarndienst Salzburg",
+   "url": "https://lawine.salzburg.at/"
+  }
+ ]
+}

@@ -1,0 +1,5 @@
+# für scripts/om_s3.py (Open-Meteo-Daten direkt aus AWS Open Data)
+omfiles
+fsspec
+s3fs
+numpy
