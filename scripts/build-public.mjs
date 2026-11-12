@@ -89,6 +89,14 @@ for (const d of days) {
 const sum7 = days.reduce((a, d) => a + (d.snow || 0), 0);
 
 /* Lawine */
+const LVL_EN = { low: 'low', moderate: 'moderate', considerable: 'considerable', high: 'high', very_high: 'very high', no_snow: 'no snow', no_rating: 'no rating' };
+const PROB_EN = { new_snow: 'New snow', wind_slab: 'Wind slab', persistent_weak_layers: 'Persistent weak layers', wet_snow: 'Wet snow', gliding_snow: 'Gliding snow', favourable_situation: 'Favourable situation', cornices: 'Cornices', no_distinct_avalanche_problem: 'No distinct avalanche problem' };
+const elevEn = e => {
+  if (!e) return 'all elevations';
+  const f = v => v === 'treeline' ? 'the treeline' : Number(v).toLocaleString('en-GB') + ' m';
+  if (e.lowerBound && e.upperBound) return `${f(e.lowerBound)} – ${f(e.upperBound)}`;
+  return e.lowerBound ? `above ${f(e.lowerBound)}` : `below ${f(e.upperBound)}`;
+};
 async function avalanche() {
   let L = E.LAW, demo = null;
   if (args['aval-date']) {
@@ -102,7 +110,8 @@ async function avalanche() {
   const b = L.b;
   if (L.none || !b) return { ...base, status: 'none' };
   if (!demo && b.validTime && toSec(b.validTime.endTime) < NOW - 36 * 3600) return { ...base, status: 'none' };
-  const ratings = (b.dangerRatings || []).filter(r => r.mainValue).map(r => {
+  const rr = (b.dangerRatings || []).filter(r => r.mainValue);
+  const ratings = rr.map(r => {
     const [n, word] = LVL[r.mainValue] || [0, r.mainValue];
     return { level: n, word, elev: elevTxt(r.elevation), period: r.validTimePeriod === 'all_day' ? '' : (r.validTimePeriod === 'earlier' ? 'vormittags' : 'nachmittags') };
   });
@@ -110,14 +119,38 @@ async function avalanche() {
   const problems = (b.avalancheProblems || []).map(p => ({ type: p.problemType, word: PROB[p.problemType] || p.problemType, elev: elevTxt(p.elevation) }));
   const aa = b.avalancheActivity || {};
   // Kurzfassung: Schlagzeile plus die ersten ein bis zwei Sätze
-  let short = strip(aa.comment || '').replace(/\s+/g, ' ');
-  if (short.length > 260) { const cut = short.slice(0, 260); const dot = cut.lastIndexOf('. '); short = (dot > 120 ? cut.slice(0, dot + 1) : cut.replace(/\s\S*$/, '') + ' …'); }
+  const shorten = s => {
+    s = strip(s || '').replace(/\s+/g, ' ');
+    if (s.length > 260) { const cut = s.slice(0, 260); const dot = cut.lastIndexOf('. '); s = (dot > 120 ? cut.slice(0, dot + 1) : cut.replace(/\s\S*$/, '') + ' …'); }
+    return s;
+  };
+  const short = shorten(aa.comment);
   const tdc = (b.tendency || [])[0];
+  // Englische Fassung für englische Seiten (absolutpark.com/en, shuttleberg.com/en): Stufen und Probleme
+  // werden hier übersetzt, Schlagzeile und Text kommen aus dem englischen Bericht des LWD (gleiche Bulletin-ID).
+  const enUrl = demo ? `https://static.lawinen-warnung.eu/bulletins/${demo}/${demo}_AT-05_en_CAAMLv6.json`
+    : 'https://static.lawinen-warnung.eu/bulletins/latest/AT-05_en_CAAMLv6.json';
+  const enJ = await E.getJSON(enUrl, null, null);
+  const be = enJ && (enJ.bulletins || []).find(x => x.bulletinID === b.bulletinID);
+  const ae = (be && be.avalancheActivity) || {};
+  const enRatings = rr.map(r => ({
+    level: (LVL[r.mainValue] || [0])[0], word: LVL_EN[r.mainValue] || r.mainValue, elev: elevEn(r.elevation),
+    period: r.validTimePeriod === 'all_day' ? '' : (r.validTimePeriod === 'earlier' ? 'morning' : 'afternoon')
+  }));
+  const en = {
+    region: 'Niedere Tauern North',
+    maxWord: (enRatings.find(r => r.level === max) || {}).word || '',
+    ratings: enRatings,
+    problems: (b.avalancheProblems || []).map(p => ({ type: p.problemType, word: PROB_EN[p.problemType] || p.problemType, elev: elevEn(p.elevation) })),
+    headline: strip(ae.highlights || '') || null,
+    text: shorten(ae.comment) || null
+  };
   return {
     ...base, status: 'ok', demo,
     max, maxWord: (ratings.find(r => r.level === max) || {}).word || '',
     ratings, problems,
     headline: strip(aa.highlights || ''), text: short,
+    en,
     tendency: tdc ? tdc.tendencyType : null,
     validFrom: b.validTime ? b.validTime.startTime : null,
     validTo: b.validTime ? b.validTime.endTime : null,

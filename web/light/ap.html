@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>AbsolutPark · Wetter &amp; Schnee · Vorschau</title>
+<!-- Nur für die Vorschau. Auf absolutpark.com sind PT Sans und AP21 bereits selbst gehostet.
+     AP21 gibt es hier nicht online (Hausschrift); lokal nimmt die Vorschau AP26 aus dem CI-Ordner, sonst PT Sans. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap">
+<style>
+  @font-face{font-family:'AP21';font-weight:bold;src:url('preview/local/AP26.otf') format('opentype')}
+  body{margin:0;background:#fcfcfc;font-family:'PT Sans',Helvetica,Arial,sans-serif;color:#4b310e}
+  .mock{background:#4b310e;height:68px;display:flex;align-items:center;justify-content:center;gap:40px;padding:0 16px}
+  .logo{display:flex;align-items:center;gap:4px;color:#fff;font:700 30px/1 'AP21','PT Sans',sans-serif}
+  .logo img{height:44px;margin:-6px -8px}
+  .mock nav{display:flex;gap:22px;color:#fff;font:700 22px/1 'AP21','PT Sans',sans-serif}
+  .mock nav span:first-child{color:#f1be41}
+  .crumb{background:#eaecef;font-size:13px;color:#4b310e;padding:10px 16px;text-align:center}
+  .container{max-width:1140px;margin:0 auto;padding:40px 16px 64px}
+  .dev{position:fixed;right:12px;bottom:12px;background:#232629;color:#fff;font:600 13px/1.2 system-ui,sans-serif;padding:8px 10px;display:flex;gap:8px;align-items:center;z-index:9;opacity:.92}
+  .dev a{color:#f1be41;text-decoration:none}
+  .dev a.on{color:#fff;text-decoration:underline}
+  @media (max-width:700px){.mock nav{display:none}}
+</style>
+</head>
+<body>
+<div class="mock" aria-hidden="true"><div class="logo">AbsolutPark<img src="preview/ap-logo.png" alt=""></div><nav><span>Park</span><span>News</span><span>Events</span><span>Shop</span><span>Team</span></nav></div>
+<div class="crumb" aria-hidden="true">Park › Wetter &amp; Schnee</div>
+
+<main class="container">
+  <!-- So sieht der Einbau im XMS-HTML-Block aus: -->
+  <div id="sb-wetter" data-theme="ap"></div>
+</main>
+
+<div class="dev">Vorschau: <a href="?" id="dLive">Live</a> · <a href="?demo=1" id="dDemo">Lawinen-Demo</a> · <a href="?" id="dDe">DE</a> <a href="?lang=en" id="dEn">EN</a></div>
+<script>
+  (function(){var q=location.search, demo=/[?&]demo=1/.test(q), en=/[?&]lang=en/.test(q), el=document.getElementById('sb-wetter');
+    var mk=function(d,e){var p=[];if(d)p.push('demo=1');if(e)p.push('lang=en');return '?'+p.join('&');};
+    document.getElementById('dLive').href=mk(false,en);document.getElementById('dDemo').href=mk(true,en);
+    document.getElementById('dDe').href=mk(demo,false);document.getElementById('dEn').href=mk(demo,true);
+    document.getElementById(demo?'dDemo':'dLive').className='on';document.getElementById(en?'dEn':'dDe').className='on';
+    if(en){document.documentElement.lang='en';document.querySelector('.crumb').textContent='Park › Weather & Snow';}
+    el.setAttribute('data-src',demo?'public-demo.json':'public.json');})();
+</script>
+<!-- Vorschau-Seite, nicht für Gäste: Auf absolutpark.com kommt nur der Einbau-Code (div mit data-theme="ap" + script) in einen HTML-Block. -->
+<script src="wetter-light.js" defer></script>
+</body>
+</html>

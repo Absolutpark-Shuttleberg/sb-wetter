@@ -11,8 +11,9 @@
 | `scripts/om_s3.py` → `cache/om/*.json` | **Gratis-Weg statt Open-Meteo-API:** liest Berg- und Tal-Punkt direkt aus „Open-Meteo on AWS Open Data“ (s3://openmeteo, CC BY 4.0) und liefert JSON im API-Format. Baut Zellwahl, Höhenkorrektur, abgeleitete Größen und Zeitinterpolation der API nach |
 | `scripts/build-public.mjs` → `web/light/public.json` | rechnet einmal durch und schreibt nur, was Gäste brauchen (ca. 4 KB, keine Modellnamen). Liest standardmäßig `cache/om`, mit `--source=api` die API |
 | `scripts/build.sh` | beides hintereinander (ca. 15 s Datenabruf + wenige Sekunden Rechnen) |
-| `web/light/wetter-light.js` | Einbau-Skript: Shadow DOM (Homepage-CSS stört nicht), Container Queries (passt in jede Spalte), SB-CI, nutzt Josefin Sans der Homepage |
-| `web/light/index.html` | Vorschau mit angedeutetem Seitenkopf. `?demo=1` zeigt einen archivierten Lawinenbericht (5.3.2026) |
+| `web/light/wetter-light.js` | Einbau-Skript: Shadow DOM (Homepage-CSS stört nicht), Container Queries (passt in jede Spalte), Design Shuttleberg oder AbsolutPark (`data-theme`), Deutsch/Englisch (Sprache der Seite), nutzt die Schriften der jeweiligen Homepage |
+| `web/light/index.html` | Vorschau Shuttleberg mit angedeutetem Seitenkopf. `?demo=1` zeigt einen archivierten Lawinenbericht (5.3.2026) |
+| `web/light/ap.html` | Vorschau AbsolutPark, `?lang=en` englisch. AP21 gibt es online nicht (Hausschrift), die Vorschau zeigt dann PT Sans |
 | `config.json` | Quelle der Wetterwarte, Adresse des offiziellen Schneeberichts, Links |
 
 ## Lokal testen
@@ -62,10 +63,18 @@ Bekannte Abweichungen und Lücken:
 - **Wetterwarte geändert?** Lokal `node scripts/extract-engine.mjs`, committen, pushen. Der Push startet sofort einen Lauf.
 - Interne Seite: die volle Wetterwarte, später ebenfalls auf die S3-Daten umstellen (statt Browser-Abrufen bei Open-Meteo).
 
-## Einbau auf shuttleberg.com (XMS-HTML-Block)
+## Einbau (XMS-HTML-Block)
 
+shuttleberg.com:
 ```html
 <div id="sb-wetter"></div>
 <script src="https://sb-wetter.max-27c.workers.dev/wetter-light.js" defer></script>
 ```
+
+absolutpark.com:
+```html
+<div id="sb-wetter" data-theme="ap"></div>
+<script src="https://sb-wetter.max-27c.workers.dev/wetter-light.js" defer></script>
+```
+Die Sprache kommt automatisch aus der Seite (`/de/` oder `/en/`), erzwingen geht mit `data-lang="en"`. Englische Lawinentexte stammen aus dem englischen Bericht des LWD; fehlt er, zeigt das Widget Stufe, Probleme und den Link.
 Ausgewogene spitze Klammern und keine Kommentare mit eigenen Tags, das lehnt der XMS-HTML-Block ab.
