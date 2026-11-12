@@ -62,7 +62,7 @@ h2{font:700 clamp(28px,4.4cqi,42px)/1.1 var(--font);text-transform:uppercase;col
 .tile .v{font-size:clamp(28px,4.2cqi,36px);font-weight:700;color:var(--blue);line-height:1.05;margin-top:6px;white-space:nowrap}
 .tile .v small{font-size:.5em;margin-left:3px}
 .tile .n{font-size:13px;color:var(--muted);margin-top:2px}
-.ph{display:inline-block;background:var(--yellow);color:var(--ink);font:700 10.5px/1 var(--font);padding:4px 6px 2px;letter-spacing:.06em;text-transform:uppercase;vertical-align:middle;margin-left:6px}
+.snow .meta{font-size:13px;color:var(--muted);margin-top:-4px}
 .links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:auto}
 .links a{font-weight:700;text-decoration:none;color:var(--blue);font-size:15px}
 .links a::after{content:" \\203A"}
@@ -246,17 +246,24 @@ h2{font:700 clamp(28px,4.4cqi,42px)/1.1 var(--font);text-transform:uppercase;col
   }
 
   function snowReport(D) {
-    const s = D.snow || {}, o = s.official || {};
-    const off = (v, unit) => ok(v) ? `${num(v)}<small>${unit}</small>` : `–<span class="ph">Platzhalter</span>`;
-    const last = o.lastSnowfall ? esc(o.lastSnowfall) : `–<span class="ph">Platzhalter</span>`;
+    // official = offizieller Schneebericht des Skigebiets (status ok/none/error), Neuschnee 24 h sonst aus der Analyse
+    const s = D.snow || {}, o = s.official || {}, has = o.status === 'ok';
+    const cmv = v => ok(v) ? `${num(v)}<small>cm</small>` : '–';
+    const ago = key => { const t = Date.now(); return key === dayKey(new Date(t)) ? 'heute' : key === dayKey(new Date(t - 864e5)) ? 'gestern' : null; };
+    const day = iso => { const d = new Date(iso.length === 10 ? iso + 'T12:00:00Z' : iso); const r = ago(dayKey(d)); return r ? cap(r) : dmy(d); };
+    const neu = has && ok(o.neu);
+    const meta = has
+      ? [o.updated ? `Stand: ${day(o.updated)}, ${hm(new Date(o.updated))} Uhr` : '', o.zustand ? `Schnee: ${o.zustand}` : ''].filter(Boolean).join(' · ')
+      : 'Aktuell liegt kein offizieller Schneebericht vor.';
     return `<section class="snow" aria-label="Schneebericht">
       <h3 class="ptitle">Schneebericht</h3>
       <div class="tiles">
-        <div class="tile"><div class="k">Schneehöhe Berg</div><div class="v">${off(o.berg, 'cm')}</div></div>
-        <div class="tile"><div class="k">Schneehöhe Tal</div><div class="v">${off(o.tal, 'cm')}</div></div>
-        <div class="tile"><div class="k">Neuschnee 24&nbsp;h</div><div class="v">${ok(s.new24) ? num(s.new24) + '<small>cm</small>' : '–'}</div><div class="n">am Berg</div></div>
-        <div class="tile"><div class="k">Letzter Schneefall</div><div class="v" style="font-size:22px">${last}</div></div>
+        <div class="tile"><div class="k">Schneehöhe Berg</div><div class="v">${has ? cmv(o.berg) : '–'}</div></div>
+        <div class="tile"><div class="k">Schneehöhe Tal</div><div class="v">${has ? cmv(o.tal) : '–'}</div></div>
+        <div class="tile"><div class="k">Neuschnee${neu ? '' : ' 24&nbsp;h'}</div><div class="v">${neu ? cmv(o.neu) : cmv(s.new24)}</div><div class="n">${neu ? 'laut Schneebericht' : 'am Berg'}</div></div>
+        <div class="tile"><div class="k">Letzter Schneefall</div><div class="v" style="font-size:22px">${has && o.lastSnowfall ? esc(day(o.lastSnowfall)) : '–'}</div>${has && o.lastSnowfall ? '<div class="n">in der Region</div>' : ''}</div>
       </div>
+      ${meta ? `<div class="meta">${esc(meta)}</div>` : ''}
       <div class="links">
         ${D.links && D.links.lifts ? `<a href="${esc(D.links.lifts)}">Geöffnete Pisten &amp; Lifte</a>` : ''}
         ${D.links && D.links.webcams ? `<a href="${esc(D.links.webcams)}">Webcams</a>` : ''}

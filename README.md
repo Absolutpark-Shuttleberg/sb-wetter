@@ -13,7 +13,7 @@
 | `scripts/build.sh` | beides hintereinander (ca. 15 s Datenabruf + wenige Sekunden Rechnen) |
 | `web/light/wetter-light.js` | Einbau-Skript: Shadow DOM (Homepage-CSS stört nicht), Container Queries (passt in jede Spalte), SB-CI, nutzt Josefin Sans der Homepage |
 | `web/light/index.html` | Vorschau mit angedeutetem Seitenkopf. `?demo=1` zeigt einen archivierten Lawinenbericht (5.3.2026) |
-| `config.json` | Quelle der Wetterwarte, offizieller Schneebericht (Platzhalter), Links |
+| `config.json` | Quelle der Wetterwarte, Adresse des offiziellen Schneeberichts, Links |
 
 ## Lokal testen
 
@@ -28,7 +28,7 @@ Dann http://127.0.0.1:8787/light/ öffnen.
 ## Inhalt Light-Version
 
 - Jetzt am Berg: Temperatur Berg/Tal (GeoSphere-Analyse), Wind, Schneefallgrenze, Wetter heute
-- Schneebericht: Schneehöhe Berg/Tal und letzter Schneefall (offizielle Werte, noch Platzhalter), Neuschnee 24 h, Links zu Pisten & Liften und Webcams
+- Schneebericht: Schneehöhe Berg/Tal, Schneezustand und letzter Schneefall aus dem offiziellen Schneebericht des Skigebiets (`scripts/bergfex.mjs`, stündlich; ohne Meldung steht „–“), Neuschnee laut Bericht oder sonst 24 h aus der Analyse, Links zu Pisten & Liften und Webcams
 - Schneeausblick: nächster Tag mit mind. 5 cm, Summe 7 Tage (gleiche Zahlen wie die Tageskarten)
 - Vorhersage 3/5/7 Tage: Symbol, Text, Berg/Tal max/min, Neuschnee, „Schnee ab … m“
 - Lawinenlage Niedere Tauern Nord (AT-05-08): Stufe in EAWS-Farbe, Höhenlagen, Probleme, Schlagzeile, Kurztext, Link zu lawine.salzburg.at

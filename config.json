@@ -5,11 +5,8 @@
     "tal": [47.3007, 13.3966, 1000]
   },
   "snowReport": {
-    "berg": null,
-    "tal": null,
-    "lastSnowfall": null,
-    "updated": null,
-    "note": "PLATZHALTER: offizielle Schneehöhen Berg/Tal und letzter Schneefall. Quelle klären (Pistenchef, Ski-amade-/Intermaps-Feed oder manuell)."
+    "bergfex": "https://www.bergfex.at/kleinarl-flachauwinkl/schneebericht/",
+    "fallback": "https://sb-wetter.max-27c.workers.dev/public.json"
   },
   "links": {
     "avalanche": "https://lawine.salzburg.at/",

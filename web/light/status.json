@@ -1,5 +1,5 @@
 {
- "erzeugt": "2026-11-12T13:34:57.154Z",
+ "erzeugt": "2026-11-12T15:46:01.797Z",
  "quellen": [
   {
    "quelle": "Open-Meteo-Daten · Einzelmodelle (Berg)",
@@ -40,11 +40,16 @@
    "quelle": "GeoSphere · AROME 1 km",
    "ok": true,
    "info": ""
+  },
+  {
+   "quelle": "Schneebericht Skigebiet",
+   "ok": true,
+   "info": "bergfex: derzeit kein Schneebericht"
   }
  ],
  "openMeteo": {
-  "abgerufen": "2026-11-12T13:34:56+00:00",
-  "dauer_s": 14.4,
+  "abgerufen": "2026-11-12T15:45:33+00:00",
+  "dauer_s": 14.2,
   "modelle": [
    "icon_d2",
    "italia_meteo_arpae_icon_2i",

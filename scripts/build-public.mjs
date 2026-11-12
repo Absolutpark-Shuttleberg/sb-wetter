@@ -4,10 +4,12 @@
 //   --om         Ordner mit det/tal/ens_s/ens_l.json aus scripts/om_s3.py (Standard: cache/om). Gratis-Weg über AWS Open Data.
 //   --source=api stattdessen die Open-Meteo-API nutzen (kommerziell nur mit Abo: OM_KEY=... als Umgebungsvariable)
 //   --aval-date  lädt einen archivierten Lawinenbericht (nur für Design-Tests, wird als Beispiel markiert)
+//   --bergfex-file  gespeicherte bergfex-Seite statt Abruf (nur zum Testen)
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { run } from '../lib/engine.mjs';
+import { loadBergfex, parseBergfex } from './bergfex.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(process.argv.slice(2).map(a => a.replace(/^--/, '').split('=')));
@@ -123,11 +125,28 @@ async function avalanche() {
   };
 }
 
+/* Offizieller Schneebericht (Schneehöhen pflegt Shuttleberg bei bergfex).
+   Ist bergfex nicht erreichbar oder hat den Seitenaufbau geändert: letzten guten Stand
+   von der Live-Seite übernehmen (höchstens 7 Tage alt) und im Actions-Log warnen. */
+async function officialSnow() {
+  const sr = cfg.snowReport || {};
+  const o = args['bergfex-file'] ? parseBergfex(readFileSync(resolve(root, args['bergfex-file']), 'utf8')) : await loadBergfex(sr.bergfex);
+  if (o.status !== 'error') return o;
+  console.log(`::warning::Schneebericht: ${o.info}`);
+  try {
+    const prev = await (await fetch(sr.fallback, { signal: AbortSignal.timeout(10000) })).json();
+    const p = prev && prev.snow && prev.snow.official;
+    if (p && p.status === 'ok' && p.updated && Date.now() - Date.parse(p.updated) < 7 * 864e5) return { ...p, info: 'letzter Stand (' + o.info + ')' };
+  } catch (e) { }
+  return o;
+}
+const official = await officialSnow();
+
 const out = {
   generated: new Date().toISOString(),
   elev: { berg: S.bergElev, tal: S.talElev },
   now: { berg, tal, today: days[0] ? { icon: days[0].icon, text: days[0].text } : null, snowLine: days[0] ? days[0].snowLine : null },
-  snow: { new24: r0(new24), new48: r0(new48), next, sum7, official: cfg.snowReport },
+  snow: { new24: r0(new24), new48: r0(new48), next, sum7, official },
   days,
   avalanche: await avalanche(),
   links: cfg.links,
@@ -146,7 +165,8 @@ writeFileSync(outFile, JSON.stringify(out, null, 1));
 if (!args['aval-date']) {
   const stat = {
     erzeugt: out.generated,
-    quellen: E.status.map(s => ({ quelle: s.label, ok: s.state === 'ok', info: s.info || '' })),
+    quellen: [...E.status.map(s => ({ quelle: s.label, ok: s.state === 'ok', info: s.info || '' })),
+      { quelle: 'Schneebericht Skigebiet', ok: official.status !== 'error', info: official.info || '' }],
     openMeteo: om ? { abgerufen: om.status.erzeugt, dauer_s: om.status.dauer_s, modelle: Object.keys(om.status.modelle), fehlend: om.status.fehlend, log: om.status.log } : 'API'
   };
   writeFileSync(join(dirname(outFile), 'status.json'), JSON.stringify(stat, null, 1));

@@ -1,21 +1,21 @@
 {
- "generated": "2026-11-12T13:34:57.154Z",
+ "generated": "2026-11-12T15:46:01.797Z",
  "elev": {
   "berg": 1950,
   "tal": 1000
  },
  "now": {
   "berg": {
-   "t": 1794484800,
-   "T": 6.8,
+   "t": 1794495600,
+   "T": 5.7,
    "W": 7,
    "src": "analyse",
-   "G": 18
+   "G": 17
   },
   "tal": {
-   "t": 1794484800,
-   "T": 8.4,
-   "W": 4,
+   "t": 1794495600,
+   "T": 8,
+   "W": 5,
    "src": "analyse"
   },
   "today": {
@@ -35,13 +35,10 @@
    "cm": 10,
    "powder": false
   },
-  "sum7": 32,
+  "sum7": 33,
   "official": {
-   "berg": null,
-   "tal": null,
-   "lastSnowfall": null,
-   "updated": null,
-   "note": "PLATZHALTER: offizielle Schneehöhen Berg/Tal und letzter Schneefall. Quelle klären (Pistenchef, Ski-amade-/Intermaps-Feed oder manuell)."
+   "status": "none",
+   "info": "bergfex: derzeit kein Schneebericht"
   }
  },
  "days": [
@@ -74,7 +71,7 @@
     "min": 2
    },
    "tal": {
-    "max": 11,
+    "max": 9,
     "min": 4
    },
    "snow": 0,
@@ -120,7 +117,7 @@
    "snowMorning": 9,
    "snowLine": 900,
    "snowLineWet": true,
-   "rain": 6,
+   "rain": 5,
    "gust": 37
   },
   {
@@ -148,7 +145,7 @@
     }
    ],
    "berg": {
-    "max": 0,
+    "max": 1,
     "min": -10
    },
    "tal": {
@@ -187,7 +184,7 @@
     }
    ],
    "berg": {
-    "max": 2,
+    "max": 3,
     "min": -6
    },
    "tal": {
@@ -196,7 +193,7 @@
    },
    "snow": 8,
    "snowMorning": 0,
-   "snowLine": 1400,
+   "snowLine": 1600,
    "snowLineWet": false,
    "rain": 0,
    "gust": 24
@@ -233,9 +230,9 @@
     "max": 10,
     "min": 0
    },
-   "snow": 2,
+   "snow": 3,
    "snowMorning": 0,
-   "snowLine": 1200,
+   "snowLine": 1300,
    "snowLineWet": false,
    "rain": 0,
    "gust": 30
@@ -270,7 +267,7 @@
    },
    "tal": {
     "max": 8,
-    "min": 1
+    "min": 2
    },
    "snow": 3,
    "snowMorning": 4,
