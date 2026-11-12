@@ -80,13 +80,25 @@ export function parseBergfex(html, now = new Date()) {
   };
 }
 
+// Bei „429 zu viele Anfragen“ einmal nachfassen, nach der Wartezeit, die bergfex nennt (höchstens 60 s, sonst 20 s).
 export async function loadBergfex(url, { timeoutMs = 15000 } = {}) {
   try {
-    const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), timeoutMs);
-    const r = await fetch(url, { headers: { 'User-Agent': UA, 'Accept-Language': 'de-AT,de;q=0.9' }, signal: ctl.signal });
-    clearTimeout(t);
-    if (!r.ok) return { status: 'error', info: `bergfex: HTTP ${r.status}` };
-    return parseBergfex(await r.text());
+    const get = async () => {
+      const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), timeoutMs);
+      try { return await fetch(url, { headers: { 'User-Agent': UA, 'Accept-Language': 'de-AT,de;q=0.9' }, signal: ctl.signal }); }
+      finally { clearTimeout(t); }
+    };
+    let r = await get(), note = '';
+    if (r.status === 429) {
+      const ra = +r.headers.get('retry-after');
+      const wait = ra > 0 && ra <= 60 ? ra : 20;
+      note = ` (nach 429, ${wait} s gewartet${r.headers.get('retry-after') ? ', Retry-After ' + r.headers.get('retry-after') : ''})`;
+      await new Promise(res => setTimeout(res, wait * 1000));
+      r = await get();
+    }
+    if (!r.ok) return { status: 'error', info: `bergfex: HTTP ${r.status}${note}` };
+    const res = parseBergfex(await r.text());
+    return note ? { ...res, info: res.info + note } : res;
   } catch (e) {
     return { status: 'error', info: 'bergfex: ' + (e.name === 'AbortError' ? 'Zeitüberschreitung' : e.message) };
   }
