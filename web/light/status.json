@@ -1,5 +1,5 @@
 {
- "erzeugt": "2026-11-12T15:46:01.797Z",
+ "erzeugt": "2026-11-18T06:49:46.206Z",
  "quellen": [
   {
    "quelle": "Open-Meteo-Daten · Einzelmodelle (Berg)",
@@ -48,8 +48,8 @@
   }
  ],
  "openMeteo": {
-  "abgerufen": "2026-11-12T15:45:33+00:00",
-  "dauer_s": 14.2,
+  "abgerufen": "2026-11-18T06:49:04+00:00",
+  "dauer_s": 14.8,
   "modelle": [
    "icon_d2",
    "italia_meteo_arpae_icon_2i",

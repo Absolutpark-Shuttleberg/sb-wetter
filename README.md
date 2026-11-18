@@ -31,7 +31,7 @@ Dann http://127.0.0.1:8787/light/ öffnen.
 - Jetzt am Berg: Temperatur Berg/Tal (GeoSphere-Analyse), Wind, Schneefallgrenze, Wetter heute
 - Schneebericht: Schneehöhe Berg/Tal, Schneezustand und letzter Schneefall aus dem offiziellen Schneebericht des Skigebiets (`scripts/bergfex.mjs`, stündlich; ohne Meldung steht „–“), Neuschnee laut Bericht oder sonst 24 h aus der Analyse, Links zu Pisten & Liften und Webcams
 - Schneeausblick: nächster Tag mit mind. 5 cm, Summe 7 Tage (gleiche Zahlen wie die Tageskarten)
-- Vorhersage 3/5/7 Tage: Symbol, Text, Berg/Tal max/min, Neuschnee, „Schnee ab … m“
+- Vorhersage 3/5/7 Tage: Symbol und Text, Symbole für vormittags/nachmittags/nachts, Neuschnee, Schneefallgrenze als Berg-Symbol, Wind am Berg (Richtung als Pfeil, Mittel 8–17 Uhr, Böen ab 40 km/h), Powder-Chance der Wetterwarte (mind. 15 cm guter Neuschnee bis Liftstart), Berg/Tal max/min
 - Lawinenlage Niedere Tauern Nord (AT-05-08): Stufe in EAWS-Farbe, Höhenlagen, Probleme, Schlagzeile, Kurztext, Link zu lawine.salzburg.at
 
 

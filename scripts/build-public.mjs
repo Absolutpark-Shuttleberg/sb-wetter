@@ -55,6 +55,24 @@ function sumBack(o, hours) {
 }
 const new24 = sumBack(INCA && INCA.berg, 24), new48 = sumBack(INCA && INCA.berg, 48);
 
+/* Wind am Berg tagsüber (8–17 Uhr): Richtung als Vektormittel aus 10 m, sonst Höhenwind 700 hPa; Mittelwert km/h */
+function dayWind(key) {
+  const ix = [];
+  for (let i = 0; i < AX.length; i++) { const p = lp(AX[i]); if (p.key === key && p.h >= 8 && p.h < 17) ix.push(i); }
+  const vec = (Ws, Ds) => {
+    let u = 0, v = 0, n = 0;
+    for (const i of ix) {
+      const w = Ws && Ws[i], d = Ds && Ds[i]; if (!ok(w) || !ok(d)) continue;
+      const r = d * Math.PI / 180, s = Math.max(w, 0.1); u += -s * Math.sin(r); v += -s * Math.cos(r); n++;
+    }
+    return n >= 3 ? (Math.atan2(-u, -v) * 180 / Math.PI + 360) % 360 : null;
+  };
+  let dir = vec(K.W, K.D10);
+  if (!ok(dir)) dir = vec(K.W7, K.D7);
+  const ws = ix.map(i => K.W[i]).filter(ok);
+  return { dir: ok(dir) ? Math.round(dir) : null, speed: ws.length ? Math.round(ws.reduce((a, b) => a + b, 0) / ws.length) : null };
+}
+
 /* 7 Tage */
 const keys = [];
 for (let i = iNow; i < AX.length && keys.length < 7; i++) { const k = lp(AX[i]).key; if (!keys.includes(k)) keys.push(k); }
@@ -73,7 +91,10 @@ const days = keys.map(key => {
     snowLine: ok(d.sl) ? Math.round(d.sl / 100) * 100 : null,
     snowLineWet: !!d.slWet,
     rain: r0(d.rainB),
-    gust: r0(d.G)
+    gust: r0(d.G),
+    wind: dayWind(key),
+    // Powder-Chance der Wetterwarte: Wahrscheinlichkeit für mind. S.thr cm guten Neuschnee bis Liftstart
+    powder: res && ok(res.Pp) ? Math.round(res.Pp * 100) : null
   };
 }).filter(Boolean);
 
@@ -179,7 +200,7 @@ const out = {
   generated: new Date().toISOString(),
   elev: { berg: S.bergElev, tal: S.talElev },
   now: { berg, tal, today: days[0] ? { icon: days[0].icon, text: days[0].text } : null, snowLine: days[0] ? days[0].snowLine : null },
-  snow: { new24: r0(new24), new48: r0(new48), next, sum7, official },
+  snow: { new24: r0(new24), new48: r0(new48), next, sum7, official, powderThr: S.thr },
   days,
   avalanche: await avalanche(),
   links: cfg.links,

@@ -48,6 +48,9 @@
       fullDay: 'Am Berg, Prognose für den ganzen Tag.', outlook: 'Schneeausblick', noBig: 'Kein größerer Neuschnee in Sicht',
       flakes: n => `Nur ein paar Flocken, in 7 Tagen zusammen rund ${n} cm.`, dry: 'Die nächsten Tage bleibt es weitgehend trocken.',
       forecast: 'Vorhersage', period: 'Zeitraum', days: k => `${k} Tage`, noSnow: 'kein Neuschnee', snowFrom: 'Schnee ab',
+      parts: ['Vorm.', 'Nachm.', 'Nacht'], partsLong: ['Vormittag', 'Nachmittag', 'Nacht'], compass: ['N', 'NO', 'O', 'SO', 'S', 'SW', 'W', 'NW'],
+      slTitle: 'Schneefallgrenze', windTitle: 'Wind am Berg, Mittel tagsüber', gust: 'Böen', powderShort: 'Powder',
+      legend: thr => [`Schneefallgrenze`, `Wind am Berg (Richtung, Mittel tagsüber)`, `Powder: Chance auf mind. ${thr} cm Pulverschnee bis Liftstart`],
       aval: 'Lawinenlage', avalCta: 'Ganzer Lawinenlagebericht', avalScope: 'Der Lagebericht gilt für das freie Gelände abseits gesicherter Pisten.',
       avalErr: 'Der Lawinenwarndienst ist gerade nicht erreichbar.',
       avalNone: 'Derzeit gibt es keinen täglichen Lagebericht für unsere Region. Sobald der Lawinenwarndienst Salzburg startet, steht hier die Zusammenfassung.',
@@ -66,6 +69,9 @@
       fullDay: 'On the mountain, full-day forecast.', outlook: 'Snow outlook', noBig: 'No major snowfall in sight',
       flakes: n => `Just a few flakes, around ${n} cm over 7 days.`, dry: 'Mostly dry for the next few days.',
       forecast: 'Forecast', period: 'Period', days: k => `${k} days`, noSnow: 'no new snow', snowFrom: 'Snow above',
+      parts: ['AM', 'PM', 'Night'], partsLong: ['Morning', 'Afternoon', 'Night'], compass: ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'],
+      slTitle: 'Snow line', windTitle: 'Mountain wind, daytime average', gust: 'gusts', powderShort: 'Powder',
+      legend: thr => [`Snow line`, `Mountain wind (direction, daytime average)`, `Powder: chance of at least ${thr} cm of fresh powder by lift opening`],
       aval: 'Avalanche danger', avalCta: 'Full avalanche bulletin', avalScope: 'The bulletin applies to open terrain away from secured slopes.',
       avalErr: 'The avalanche warning service is currently unavailable.',
       avalNone: 'There is currently no daily bulletin for our region. As soon as the Salzburg avalanche warning service starts, the summary will appear here.',
@@ -87,7 +93,7 @@
   --sky:#1ea1d5;--yellow:#fcc40d;--yellow-hv:#ebb707;
   --ink:#232629;--muted:#5d6872;--line:#dae3ed;--text2:#3a4148;--faint:#9aa6b2;
   --sun:#fcc40d;--moon:#b8c6d6;--cloud:#cfdae6;--cloud-dk:#9cb0c5;--snow:#1ea1d5;--rain:#0f5aa1;
-  --chip:#1ea1d5;--chip-fg:#fff;--today:#0f5aa1;--accent-tx:#1ea1d5;
+  --chip:#1ea1d5;--chip-fg:#fff;--today:#0f5aa1;--accent-tx:#1ea1d5;--mtn:#b9cde3;--mtn-line:#7f9bb8;
   --hero-bg:linear-gradient(165deg,#1468b4 0%,#0f5aa1 40%,#0a4378 78%,#083158 100%);
   --hero-lab:#8fd3f2;--hero-soft:#cfe3f5;--hero-soft2:#d4e6f6;
   --hero-cloud:#eef4fa;--hero-cloud-dk:#b7cbe0;--hero-snow:#fff;--hero-rain:#a9dcf5;--hero-moon:#e3ebf4;
@@ -103,7 +109,7 @@
   --sky:#4b310e;--yellow:#f1be41;--yellow-hv:#e6ad24;
   --ink:#4b310e;--muted:#87735c;--line:#e8e3dd;--text2:#5a4425;--faint:#b3a38f;
   --sun:#f1be41;--moon:#cbbfae;--cloud:#e2dbd1;--cloud-dk:#b8aa97;--snow:#17a2b8;--rain:#5d7f96;
-  --chip:#f1be41;--chip-fg:#4b310e;--today:#f1be41;--accent-tx:#4b310e;
+  --chip:#f1be41;--chip-fg:#4b310e;--today:#f1be41;--accent-tx:#4b310e;--mtn:#d3c6b4;--mtn-line:#9c8a73;
   --hero-bg:linear-gradient(165deg,#5e3f16 0%,#4b310e 42%,#3a2609 78%,#291a05 100%);
   --hero-lab:#f1be41;--hero-soft:#eadfce;--hero-soft2:#e3d6c3;
   --hero-cloud:#f6f1ea;--hero-cloud-dk:#cdbfab;--hero-snow:#fff;--hero-rain:#d9cbb6;--hero-moon:#ece4d8;
@@ -172,7 +178,7 @@ h2{font:700 clamp(28px,4.4cqi,42px)/1.1 var(--title-font);text-transform:var(--t
 .seg button[aria-pressed="true"]{background:var(--blue);color:#fff}
 .seg button:hover:not([aria-pressed="true"]){background:var(--blue-lt)}
 .scroll{overflow-x:auto;scrollbar-width:thin}
-.days{display:grid;grid-template-columns:repeat(var(--n),minmax(124px,1fr));gap:10px}
+.days{display:grid;grid-template-columns:repeat(var(--n),minmax(132px,1fr));gap:10px}
 .day{border:1px solid var(--line);background:#fff;padding:16px 12px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative}
 .day.today{border-color:var(--today);box-shadow:inset 0 4px 0 var(--today)}
 .day .wd{font-weight:700;text-transform:uppercase;color:var(--blue);font-size:17px;letter-spacing:.05em}
@@ -181,7 +187,7 @@ h2{font:700 clamp(28px,4.4cqi,42px)/1.1 var(--title-font);text-transform:var(--t
 .day .tx{font-size:15px;line-height:1.25;min-height:2.5em}
 .temps{width:100%;display:grid;gap:5px;border-top:1px solid var(--line);padding-top:10px;margin-top:2px}
 .trow{display:flex;justify-content:space-between;align-items:baseline;gap:6px;font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
-.trow b{font-size:19px;color:var(--ink);letter-spacing:0;text-transform:none}
+.trow b{font-size:19px;color:var(--ink);letter-spacing:0;text-transform:none;white-space:nowrap}
 .trow .lo{color:var(--muted);font-weight:400;font-size:15px}
 .snowc{display:flex;flex-direction:column;align-items:center;gap:4px;min-height:52px;justify-content:flex-start;margin-top:4px}
 .chip{display:inline-flex;align-items:center;gap:6px;background:var(--chip);color:var(--chip-fg);font-weight:700;padding:6px 10px 4px;font-size:15px;white-space:nowrap}
@@ -189,6 +195,28 @@ h2{font:700 clamp(28px,4.4cqi,42px)/1.1 var(--title-font);text-transform:var(--t
 .chip.lite{background:var(--blue-md);color:var(--blue-dk)}
 .nosnow{color:var(--faint);font-size:14px;padding-top:6px}
 .sl{font-size:12.5px;color:var(--muted)}
+/* Tagesteile: vormittags, nachmittags, nachts */
+.parts{display:grid;grid-template-columns:repeat(3,1fr);width:100%;gap:2px;margin-top:2px}
+.pt{display:flex;flex-direction:column;align-items:center;gap:0;min-width:0}
+.pt .pi{width:28px;height:28px}
+.pt span{font-size:10.5px;color:var(--muted);letter-spacing:0;font-weight:700;line-height:1.2;white-space:nowrap}
+/* Schneefallgrenze, Wind, Powder */
+.facts{width:100%;display:grid;gap:7px;border-top:1px solid var(--line);padding-top:10px;margin-top:2px}
+.f{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:14px;color:var(--ink);min-width:0}
+.f b{font-weight:700;white-space:nowrap}
+.f small{display:block;font-size:11.5px;color:var(--muted);font-weight:400;text-align:right}
+.f .sli{width:34px;height:22px;flex:none}
+.f .wdi{width:22px;height:22px;flex:none}
+.fk{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.pw{display:grid;grid-template-columns:auto auto;justify-content:space-between;row-gap:4px}
+.bar{grid-column:1/-1;height:5px;background:var(--blue-lt);position:relative;overflow:hidden}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--chip)}
+.pw.hi b{color:var(--blue)}
+.f.sn{display:none}
+.f.wr{min-height:34px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--muted);margin-top:12px;align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend .sli{width:26px;height:17px}.legend .wdi{width:17px;height:17px}
 
 /* Lawine */
 .aval{border:1px solid var(--line);padding:24px 26px}
@@ -244,12 +272,19 @@ h2{font:700 clamp(28px,4.4cqi,42px)/1.1 var(--title-font);text-transform:var(--t
   .outlook svg{width:38px;height:38px}
   .days{grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
   .scroll{overflow:visible}
-  .day{display:grid;grid-template-columns:62px 46px minmax(0,1fr) auto;grid-template-areas:"when ico tx temps" "when ico snowc temps";
+  .day{display:grid;grid-template-columns:62px 46px minmax(0,1fr) auto;grid-template-areas:"when ico tx temps" "parts parts parts parts" "facts facts facts facts";
     text-align:left;align-items:center;border:0;border-bottom:1px solid var(--line);padding:12px 2px;gap:2px 12px;box-shadow:none}
   .day.today{box-shadow:inset 4px 0 0 var(--today);padding-left:12px;border-color:var(--line)}
   .when{grid-area:when}.day .ico{grid-area:ico;width:46px;height:46px}.tx{grid-area:tx;min-height:0!important}
   .temps{grid-area:temps;border:0;padding:0;margin:0;width:auto;min-width:104px}
-  .snowc{grid-area:snowc;flex-direction:row;align-items:center;min-height:0;margin:0;gap:8px;flex-wrap:wrap}
+  .snowc{display:none}
+  .parts{grid-area:parts;display:flex;gap:16px;justify-content:flex-start;margin:4px 0 0}
+  .pt{flex-direction:row;gap:4px;flex:none}.pt .pi{width:24px;height:24px;flex:none}.pt span{font-size:11.5px;font-weight:400}
+  .facts{grid-area:facts;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;border:0;padding:6px 0 0;margin:0}
+  .f{justify-content:flex-start;font-size:13.5px}.f small{display:inline;margin-left:4px}.f.wr{min-height:0}
+  .f .sli{width:28px;height:18px}.f .wdi{width:18px;height:18px}
+  .pw{display:flex;align-items:center;gap:6px}.bar{width:44px;height:5px}
+  .f.sn{display:flex}.f.sn .chip{margin:0}
   .day .wd{font-size:15px}.day .dt{font-size:13px}
   .chip{padding:4px 8px 2px;font-size:13.5px}
   .nosnow{display:none}
@@ -329,6 +364,24 @@ h2{font:700 clamp(28px,4.4cqi,42px)/1.1 var(--title-font);text-transform:var(--t
   const BIG_FLAKE = '<svg viewBox="0 0 48 48" aria-hidden="true"><g stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"><line x1="24" y1="4" x2="24" y2="44"/><line x1="6.7" y1="14" x2="41.3" y2="34"/><line x1="6.7" y1="34" x2="41.3" y2="14"/><path d="M19 8l5 5 5-5M19 40l5-5 5 5M8.5 21l6.8-1.8L13.5 12.4M39.5 27l-6.8 1.8 1.8 6.8M8.5 27l6.8 1.8-1.8 6.8M39.5 21l-6.8-1.8 1.8-6.8"/></g></svg>';
   const SUN_BIG = '<svg viewBox="0 0 48 48" aria-hidden="true"><g stroke="var(--blue)" stroke-width="3" stroke-linecap="round"><line x1="24" y1="3" x2="24" y2="9"/><line x1="24" y1="39" x2="24" y2="45"/><line x1="3" y1="24" x2="9" y2="24"/><line x1="39" y1="24" x2="45" y2="24"/><line x1="9.2" y1="9.2" x2="13.4" y2="13.4"/><line x1="34.6" y1="34.6" x2="38.8" y2="38.8"/><line x1="9.2" y1="38.8" x2="13.4" y2="34.6"/><line x1="34.6" y1="13.4" x2="38.8" y2="9.2"/></g><circle cx="24" cy="24" r="9" fill="var(--sun)"/></svg>';
 
+  // Schneefallgrenze: Berg (900–2150 m) mit Schneehaube oberhalb der Grenze und gestrichelter Linie
+  let slId = 0;
+  function slIcon(sl, title) {
+    const lo = 900, hi = 2150, top = 3, base = 23, y = m => P2(base - (Math.min(Math.max(m, lo - 60), hi + 60) - lo) / (hi - lo) * (base - top));
+    const id = 'sb-sl' + (++slId), mtn = 'M0 24 L11 8 L16 13 L23 3 L36 24 Z';
+    const yl = ok(sl) ? y(sl) : null;
+    return `<svg class="sli" viewBox="0 0 36 24" role="img" aria-label="${esc(title)}"><defs><clipPath id="${id}"><path d="${mtn}"/></clipPath></defs>
+      <path d="${mtn}" fill="var(--mtn)"/>${yl != null ? `<rect x="0" y="0" width="36" height="${yl}" fill="#fff" clip-path="url(#${id})"/>` : ''}
+      <path d="${mtn}" fill="none" stroke="var(--mtn-line)" stroke-width="1" stroke-linejoin="round"/>
+      ${yl != null ? `<line x1="0" x2="36" y1="${yl}" y2="${yl}" stroke="var(--blue)" stroke-width="1.6" stroke-dasharray="3 2"/>` : ''}</svg>`;
+  }
+  // Windpfeil: zeigt, wohin der Wind weht (Richtung „aus NW“ = Pfeil nach SO)
+  function windIcon(dir, title) {
+    const r = ok(dir) ? (dir + 180) % 360 : 0;
+    return `<svg class="wdi" viewBox="0 0 22 22" role="img" aria-label="${esc(title)}"><circle cx="11" cy="11" r="10" fill="var(--blue-lt)"/>
+      ${ok(dir) ? `<g transform="rotate(${r} 11 11)"><path d="M11 3.5 L15.5 13 L11 10.8 L6.5 13 Z" fill="var(--blue)"/><line x1="11" y1="10" x2="11" y2="17.5" stroke="var(--blue)" stroke-width="2" stroke-linecap="round"/></g>` : ''}</svg>`;
+  }
+
   function ridgeSVG() {
     const W = 1000, H = 240, x = km => P2(km / 7.01 * W), y = m => P2(H - (m - 900) * 0.2);
     const pts = PROFILE.map(([k, m]) => `${x(k)},${y(m)}`).join(' L');
@@ -400,20 +453,35 @@ h2{font:700 clamp(28px,4.4cqi,42px)/1.1 var(--title-font);text-transform:var(--t
   }
 
   function forecast(D, L, n) {
-    const S = L.S, today = dayKey(new Date());
+    const S = L.S, today = dayKey(new Date()), thr = (D.snow && D.snow.powderThr) || 15;
     const days = (D.days || []).filter(d => d.key >= today).slice(0, n);
+    const pct = v => !ok(v) ? '–' : v < 5 ? '&lt;\u00a05\u00a0%' : Math.round(v / 5) * 5 + '\u00a0%';
+    const lg = S.legend(thr);
     const cards = days.map(d => {
       const r = L.rel(d.key), wd = r && r !== S.rel[2] ? cap(r) : L.wdLong(d.key);
-      const wet = (d.snow >= 1) || (d.rain >= 1), tx = L.wx(d.icon, d.text);
+      const tx = L.wx(d.icon, d.text);
       const snow = d.snow >= 1
         ? `<span class="chip${d.snow < 5 ? ' lite' : ''}">${FLAKE}${L.num(d.snow)} cm</span>`
         : `<span class="nosnow">${esc(S.noSnow)}</span>`;
       const dt = L.lang === 'en' ? `${d.d}/${d.m}` : `${String(d.d).padStart(2, '0')}.${String(d.m).padStart(2, '0')}.`;
+      const w = d.wind || {};
+      const parts = (d.parts || []).length ? `<div class="parts">${[0, 1, 2].map(k => {
+        const p = (d.parts || [])[k]; if (!p) return '<div class="pt"></div>';
+        const t = L.wx(p.icon, p.text);
+        return `<div class="pt">${wxIcon(p.icon, S.partsLong[k] + ': ' + t, 'pi')}<span>${esc(S.parts[k])}</span></div>`;
+      }).join('')}</div>` : '';
       return `<article class="day${d.key === today ? ' today' : ''}" aria-label="${esc(wd)}">
         <div class="when"><div class="wd">${esc(wd)}</div><div class="dt">${dt}</div></div>
         ${wxIcon(d.icon, tx)}
         <div class="tx">${esc(cap(tx))}</div>
-        <div class="snowc">${snow}${wet && ok(d.snowLine) ? `<span class="sl">${esc(S.snowFrom)} ${L.m100(d.snowLine)}</span>` : ''}</div>
+        ${parts}
+        <div class="snowc">${snow}</div>
+        <div class="facts">
+          ${d.snow >= 1 ? `<div class="f sn">${snow}</div>` : ''}
+          <div class="f" title="${esc(S.slTitle)}">${slIcon(d.snowLine, S.slTitle)}<b>${L.m100(d.snowLine)}</b></div>
+          <div class="f wr" title="${esc(S.windTitle)}">${windIcon(w.dir, S.windTitle)}<b>${ok(w.dir) ? S.compass[Math.round(w.dir / 45) % 8] + ' ' : ''}${ok(w.speed) ? L.num(w.speed) + '\u00a0km/h' : '–'}${ok(d.gust) && d.gust >= 40 ? `<small>${esc(S.gust)} ${L.num(d.gust)}</small>` : ''}</b></div>
+          <div class="f pw${ok(d.powder) && d.powder >= 50 ? ' hi' : ''}" title="${esc(S.legend(thr)[2])}"><span class="fk">${esc(S.powderShort)}</span><b>${pct(d.powder)}</b><span class="bar" aria-hidden="true"><i style="width:${ok(d.powder) ? Math.min(100, Math.max(0, d.powder)) : 0}%"></i></span></div>
+        </div>
         <div class="temps">
           <div class="trow"><span>${S.mtnShort}</span><b>${L.deg(d.berg.max)}<span class="lo"> / ${L.deg(d.berg.min)}</span></b></div>
           <div class="trow"><span>${S.valley}</span><b>${L.deg(d.tal.max)}<span class="lo"> / ${L.deg(d.tal.min)}</span></b></div>
@@ -424,6 +492,7 @@ h2{font:700 clamp(28px,4.4cqi,42px)/1.1 var(--title-font);text-transform:var(--t
       <div class="sec"><h3 class="ptitle">${esc(S.forecast)}</h3>
         <div class="seg" role="group" aria-label="${esc(S.period)}">${[3, 5, 7].map(k => `<button type="button" data-n="${k}" aria-pressed="${k === n}">${esc(S.days(k))}</button>`).join('')}</div></div>
       <div class="scroll"><div class="days" style="--n:${days.length}">${cards}</div></div>
+      <div class="legend"><span>${slIcon(1500, lg[0])}${esc(lg[0])}</span><span>${windIcon(315, lg[1])}${esc(lg[1])}</span><span>${esc(lg[2])}</span></div>
     </section>`;
   }
 

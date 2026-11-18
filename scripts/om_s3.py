@@ -51,7 +51,7 @@ NOT_YET = {"geosphere_arome_austria": "im Bucket seit 06.11. nicht aktuell (AROM
            "gfs025": "GEFS-Member nicht im Bucket"}
 TAL_MODELS = ["icon_d2", "icon_eu", "ecmwf_ifs", "gfs_seamless"]
 ELEV_FROM = {"ecmwf_aifs025_single": "ecmwf_ifs025"}   # API nutzt für AIFS das Höhenmodell von IFS 0,25°
-V_DET = ["temperature_2m", "relative_humidity_2m", "precipitation", "freezing_level_height", "wind_speed_10m", "wind_gusts_10m",
+V_DET = ["temperature_2m", "relative_humidity_2m", "precipitation", "freezing_level_height", "wind_speed_10m", "wind_direction_10m", "wind_gusts_10m",
          "cloud_cover", "pressure_msl", "temperature_850hPa", "wind_speed_700hPa", "wind_direction_700hPa"]
 V_ENS = ["temperature_2m", "relative_humidity_2m", "precipitation", "wind_speed_10m"]
 SUM_VARS = {"precipitation"}
@@ -267,7 +267,7 @@ def model_series(model, folders, lat, lon, elev, ax, want):
     for v in want:
         if src(v): need.add(v)
         elif v == "relative_humidity_2m": need |= {"temperature_2m", "dew_point_2m"}
-        elif v == "wind_speed_10m": need |= {"wind_u_component_10m", "wind_v_component_10m"}
+        elif v in ("wind_speed_10m", "wind_direction_10m"): need |= {"wind_u_component_10m", "wind_v_component_10m"}
         elif v in ("wind_speed_700hPa", "wind_direction_700hPa"): need |= {"wind_u_component_700hPa", "wind_v_component_700hPa"}
     with ThreadPoolExecutor(12) as ex:
         data = dict(zip(sorted(need), ex.map(read, sorted(need))))
@@ -279,6 +279,8 @@ def model_series(model, folders, lat, lon, elev, ax, want):
             a = [rh_from(t, d) for t, d in zip(data["temperature_2m"], data["dew_point_2m"])]
         if a is None and v == "wind_speed_10m" and data.get("wind_u_component_10m"):
             a = [None if u is None or w is None else math.hypot(u, w) for u, w in zip(data["wind_u_component_10m"], data["wind_v_component_10m"])]
+        if a is None and v == "wind_direction_10m" and data.get("wind_u_component_10m"):   # meteorologisch: woher der Wind kommt
+            a = [None if u is None or w is None else (math.degrees(math.atan2(-u, -w)) + 360) % 360 for u, w in zip(data["wind_u_component_10m"], data["wind_v_component_10m"])]
         if a is None and v in ("wind_speed_700hPa", "wind_direction_700hPa") and data.get("wind_u_component_700hPa"):
             U, V = data["wind_u_component_700hPa"], data["wind_v_component_700hPa"]
             if v == "wind_speed_700hPa": a = [None if u is None or w is None else math.hypot(u, w) for u, w in zip(U, V)]

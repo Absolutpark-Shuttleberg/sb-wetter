@@ -1,51 +1,140 @@
 {
- "generated": "2026-11-12T15:59:53.617Z",
+ "generated": "2026-11-18T06:50:01.168Z",
  "elev": {
   "berg": 1950,
   "tal": 1000
  },
  "now": {
   "berg": {
-   "t": 1794495600,
-   "T": 5.7,
-   "W": 7,
+   "t": 1794981600,
+   "T": 1.9,
+   "W": 30,
    "src": "analyse",
-   "G": 17
+   "G": 35
   },
   "tal": {
-   "t": 1794495600,
-   "T": 8,
-   "W": 5,
+   "t": 1794981600,
+   "T": 2.3,
+   "W": 1,
    "src": "analyse"
   },
   "today": {
-   "icon": "overcast",
-   "text": "bedeckt"
+   "icon": "partly",
+   "text": "heiter bis wolkig"
   },
-  "snowLine": 2000
+  "snowLine": 1600
  },
  "snow": {
   "new24": 0,
   "new48": 0,
   "next": {
-   "key": "2026-11-13",
-   "wd": "Fr",
-   "d": 13,
+   "key": "2026-11-23",
+   "wd": "Mo",
+   "d": 23,
    "m": 11,
-   "cm": 10,
+   "cm": 8,
    "powder": false
   },
-  "sum7": 33,
+  "sum7": 23,
   "official": {
    "status": "none",
    "info": "bergfex: derzeit kein Schneebericht"
-  }
+  },
+  "powderThr": 15
  },
  "days": [
   {
-   "key": "2026-11-12",
+   "key": "2026-11-18",
+   "wd": "Mi",
+   "d": 18,
+   "m": 11,
+   "icon": "partly",
+   "text": "heiter bis wolkig",
+   "parts": [
+    {
+     "icon": "cloudy",
+     "text": "überwiegend bewölkt",
+     "lab": "vorm."
+    },
+    {
+     "icon": "cloudy",
+     "text": "überwiegend bewölkt",
+     "lab": "nachm."
+    },
+    {
+     "icon": "overcast",
+     "text": "bewölkt",
+     "lab": "nachts"
+    }
+   ],
+   "berg": {
+    "max": 5,
+    "min": -1
+   },
+   "tal": {
+    "max": 9,
+    "min": 2
+   },
+   "snow": 0,
+   "snowMorning": 0,
+   "snowLine": 1600,
+   "snowLineWet": true,
+   "rain": 0,
+   "gust": 45,
+   "wind": {
+    "dir": 279,
+    "speed": 6
+   },
+   "powder": 0
+  },
+  {
+   "key": "2026-11-19",
    "wd": "Do",
-   "d": 12,
+   "d": 19,
+   "m": 11,
+   "icon": "snow",
+   "text": "Schneefall, windig",
+   "parts": [
+    {
+     "icon": "overcast",
+     "text": "bedeckt",
+     "lab": "vorm."
+    },
+    {
+     "icon": "snow",
+     "text": "Schneefall",
+     "lab": "nachm."
+    },
+    {
+     "icon": "overcast",
+     "text": "bewölkt",
+     "lab": "nachts"
+    }
+   ],
+   "berg": {
+    "max": 1,
+    "min": -2
+   },
+   "tal": {
+    "max": 7,
+    "min": 2
+   },
+   "snow": 4,
+   "snowMorning": 0,
+   "snowLine": 1500,
+   "snowLineWet": true,
+   "rain": 0,
+   "gust": 53,
+   "wind": {
+    "dir": 229,
+    "speed": 7
+   },
+   "powder": 0
+  },
+  {
+   "key": "2026-11-20",
+   "wd": "Fr",
+   "d": 20,
    "m": 11,
    "icon": "overcast",
    "text": "bedeckt",
@@ -56,42 +145,91 @@
      "lab": "vorm."
     },
     {
-     "icon": "rain",
-     "text": "Regen",
+     "icon": "overcast",
+     "text": "bedeckt",
      "lab": "nachm."
     },
     {
-     "icon": "sleet",
-     "text": "Schneeregen",
+     "icon": "overcast",
+     "text": "bewölkt",
      "lab": "nachts"
     }
    ],
    "berg": {
-    "max": 7,
-    "min": 2
+    "max": 0,
+    "min": -4
    },
    "tal": {
-    "max": 9,
-    "min": 4
+    "max": 7,
+    "min": 0
    },
-   "snow": 0,
-   "snowMorning": 0,
-   "snowLine": 2000,
-   "snowLineWet": true,
-   "rain": 5,
-   "gust": 19
+   "snow": 4,
+   "snowMorning": 4,
+   "snowLine": 1300,
+   "snowLineWet": false,
+   "rain": 0,
+   "gust": 37,
+   "wind": {
+    "dir": 266,
+    "speed": 5
+   },
+   "powder": 0
   },
   {
-   "key": "2026-11-13",
-   "wd": "Fr",
-   "d": 13,
+   "key": "2026-11-21",
+   "wd": "Sa",
+   "d": 21,
    "m": 11,
    "icon": "snow",
    "text": "Schneefall",
    "parts": [
     {
-     "icon": "snow-heavy",
-     "text": "Starker Schneefall",
+     "icon": "snow",
+     "text": "Schneefall",
+     "lab": "vorm."
+    },
+    {
+     "icon": "snow",
+     "text": "Schneefall",
+     "lab": "nachm."
+    },
+    {
+     "icon": "overcast",
+     "text": "bedeckt",
+     "lab": "nachts"
+    }
+   ],
+   "berg": {
+    "max": -2,
+    "min": -5
+   },
+   "tal": {
+    "max": 5,
+    "min": 0
+   },
+   "snow": 2,
+   "snowMorning": 2,
+   "snowLine": 1100,
+   "snowLineWet": true,
+   "rain": 0,
+   "gust": 46,
+   "wind": {
+    "dir": 281,
+    "speed": 7
+   },
+   "powder": 1
+  },
+  {
+   "key": "2026-11-22",
+   "wd": "So",
+   "d": 22,
+   "m": 11,
+   "icon": "overcast",
+   "text": "bedeckt",
+   "parts": [
+    {
+     "icon": "overcast",
+     "text": "bedeckt",
      "lab": "vorm."
     },
     {
@@ -100,72 +238,82 @@
      "lab": "nachm."
     },
     {
-     "icon": "partly-night",
-     "text": "teils bewölkt",
+     "icon": "snow",
+     "text": "Schneefall",
      "lab": "nachts"
     }
    ],
    "berg": {
-    "max": 2,
-    "min": -8
-   },
-   "tal": {
-    "max": 7,
-    "min": -1
-   },
-   "snow": 10,
-   "snowMorning": 9,
-   "snowLine": 900,
-   "snowLineWet": true,
-   "rain": 5,
-   "gust": 37
-  },
-  {
-   "key": "2026-11-14",
-   "wd": "Sa",
-   "d": 14,
-   "m": 11,
-   "icon": "sun",
-   "text": "sonnig",
-   "parts": [
-    {
-     "icon": "sun",
-     "text": "sonnig",
-     "lab": "vorm."
-    },
-    {
-     "icon": "sun",
-     "text": "sonnig",
-     "lab": "nachm."
-    },
-    {
-     "icon": "moon",
-     "text": "klar",
-     "lab": "nachts"
-    }
-   ],
-   "berg": {
-    "max": 1,
-    "min": -10
+    "max": 0,
+    "min": -7
    },
    "tal": {
     "max": 6,
-    "min": -3
+    "min": -1
    },
-   "snow": 0,
-   "snowMorning": 0,
-   "snowLine": 500,
-   "snowLineWet": false,
+   "snow": 3,
+   "snowMorning": 2,
+   "snowLine": 1200,
+   "snowLineWet": true,
    "rain": 0,
-   "gust": 22
+   "gust": 18,
+   "wind": {
+    "dir": 170,
+    "speed": 3
+   },
+   "powder": 0
   },
   {
-   "key": "2026-11-15",
-   "wd": "So",
-   "d": 15,
+   "key": "2026-11-23",
+   "wd": "Mo",
+   "d": 23,
    "m": 11,
-   "icon": "partly",
-   "text": "heiter bis wolkig",
+   "icon": "snow",
+   "text": "Schneefall",
+   "parts": [
+    {
+     "icon": "snow",
+     "text": "Schneefall",
+     "lab": "vorm."
+    },
+    {
+     "icon": "snow",
+     "text": "Schneefall",
+     "lab": "nachm."
+    },
+    {
+     "icon": "overcast",
+     "text": "bedeckt",
+     "lab": "nachts"
+    }
+   ],
+   "berg": {
+    "max": -4,
+    "min": -6
+   },
+   "tal": {
+    "max": 2,
+    "min": -2
+   },
+   "snow": 8,
+   "snowMorning": 6,
+   "snowLine": 800,
+   "snowLineWet": true,
+   "rain": 0,
+   "gust": 26,
+   "wind": {
+    "dir": 311,
+    "speed": 6
+   },
+   "powder": 10
+  },
+  {
+   "key": "2026-11-24",
+   "wd": "Di",
+   "d": 24,
+   "m": 11,
+   "icon": "sun",
+   "text": "sonnig",
    "parts": [
     {
      "icon": "partly",
@@ -184,136 +332,24 @@
     }
    ],
    "berg": {
-    "max": 3,
-    "min": -6
+    "max": -1,
+    "min": -8
    },
    "tal": {
-    "max": 9,
-    "min": -2
+    "max": 5,
+    "min": -3
    },
-   "snow": 8,
-   "snowMorning": 0,
-   "snowLine": 1600,
+   "snow": 2,
+   "snowMorning": 5,
+   "snowLine": 400,
    "snowLineWet": false,
    "rain": 0,
-   "gust": 24
-  },
-  {
-   "key": "2026-11-16",
-   "wd": "Mo",
-   "d": 16,
-   "m": 11,
-   "icon": "overcast",
-   "text": "bedeckt",
-   "parts": [
-    {
-     "icon": "overcast",
-     "text": "bedeckt",
-     "lab": "vorm."
-    },
-    {
-     "icon": "overcast",
-     "text": "bedeckt",
-     "lab": "nachm."
-    },
-    {
-     "icon": "overcast",
-     "text": "bewölkt",
-     "lab": "nachts"
-    }
-   ],
-   "berg": {
-    "max": 3,
-    "min": -4
+   "gust": 18,
+   "wind": {
+    "dir": 197,
+    "speed": 3
    },
-   "tal": {
-    "max": 10,
-    "min": 0
-   },
-   "snow": 3,
-   "snowMorning": 0,
-   "snowLine": 1300,
-   "snowLineWet": false,
-   "rain": 0,
-   "gust": 30
-  },
-  {
-   "key": "2026-11-17",
-   "wd": "Di",
-   "d": 17,
-   "m": 11,
-   "icon": "overcast",
-   "text": "bedeckt",
-   "parts": [
-    {
-     "icon": "overcast",
-     "text": "bedeckt",
-     "lab": "vorm."
-    },
-    {
-     "icon": "overcast",
-     "text": "bedeckt",
-     "lab": "nachm."
-    },
-    {
-     "icon": "snow",
-     "text": "Schneefall",
-     "lab": "nachts"
-    }
-   ],
-   "berg": {
-    "max": 2,
-    "min": -4
-   },
-   "tal": {
-    "max": 8,
-    "min": 2
-   },
-   "snow": 3,
-   "snowMorning": 4,
-   "snowLine": 1900,
-   "snowLineWet": true,
-   "rain": 0,
-   "gust": 24
-  },
-  {
-   "key": "2026-11-18",
-   "wd": "Mi",
-   "d": 18,
-   "m": 11,
-   "icon": "snow",
-   "text": "Schneefall",
-   "parts": [
-    {
-     "icon": "snow",
-     "text": "Schneefall",
-     "lab": "vorm."
-    },
-    {
-     "icon": "snow",
-     "text": "Schneefall",
-     "lab": "nachm."
-    },
-    {
-     "icon": "overcast",
-     "text": "bewölkt",
-     "lab": "nachts"
-    }
-   ],
-   "berg": {
-    "max": 1,
-    "min": -4
-   },
-   "tal": {
-    "max": 8,
-    "min": 1
-   },
-   "snow": 9,
-   "snowMorning": 4,
-   "snowLine": 1500,
-   "snowLineWet": true,
-   "rain": 0,
-   "gust": 33
+   "powder": 20
   }
  ],
  "avalanche": {
