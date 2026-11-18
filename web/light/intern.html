@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Wetterwarte intern · Vorschau</title>
+<style>
+  /* Nachbau des Seitenkopfs von shuttleberg.com: fixer Kopf (#outerHeader), der beim Scrollen schrumpft,
+     darunter klebende Brotkrumen (#outerBreadcrumbs). Daran misst der Einbau, wo die Unternavigation klebt. */
+  html{font-size:16px}
+  body{margin:0;background:#fff;font-family:Helvetica,Arial,sans-serif;color:#232629}
+  #outerHeader{position:fixed;top:0;left:0;right:0;z-index:6;background:#0f5aa1;color:#fff;padding:2rem 1rem 1rem;transition:padding .2s}
+  body.scrolled #outerHeader{padding-top:.5rem}
+  #outerHeader .in{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;height:40px}
+  #outerHeader img{height:30px;filter:brightness(0) invert(1)}
+  #outerHeader nav{display:flex;gap:18px;font-weight:700;font-size:14px;text-transform:uppercase}
+  #outerHeader nav span:last-child{color:#fcc40d}
+  #outerContent{padding-top:7.5rem}
+  #outerBreadcrumbs{position:sticky;top:6rem;z-index:5;background:#f3f3f3;font-size:13px;color:#5d6872;padding:10px 16px;text-align:center}
+  body.scrolled #outerBreadcrumbs{top:calc(4.5rem - 1px)}
+  .container{max-width:1320px;margin:0 auto;padding:24px 12px 64px}
+  .dev{position:fixed;right:12px;bottom:12px;background:#232629;color:#fff;font:600 13px/1.3 system-ui,sans-serif;padding:8px 10px;z-index:9;opacity:.92;max-width:260px}
+  footer{background:#0f5aa1;color:#fff;padding:40px 16px;text-align:center;font-size:14px}
+  @media (max-width:991px){#outerHeader nav{display:none}#outerHeader{padding:1rem}body.scrolled #outerHeader{padding:.5rem 1rem}#outerBreadcrumbs{top:calc(4.5rem - 1px)}body.scrolled #outerBreadcrumbs{top:calc(3.5rem - 1px)}#outerContent{padding-top:4.5rem}.dev{font-size:11px;max-width:170px;padding:6px 8px}}
+</style>
+</head>
+<body>
+<div id="outerHeader" aria-hidden="true"><div class="in"><img src="preview/sb-logo.png" alt=""><nav><span>Skigebiet</span><span>Familie</span><span>Events</span><span>Tickets</span><span>Info &amp; Service</span></nav></div></div>
+<div id="outerContent">
+  <div id="outerBreadcrumbs" aria-hidden="true">Intern › Wetterwarte</div>
+  <main>
+    <div class="container">
+      <div id="sb-wetterwarte"></div>
+    </div>
+  </main>
+</div>
+<footer aria-hidden="true">Seitenfuß der Homepage (nur Vorschau)</footer>
+<div class="dev">Vorschau der internen Wetterwarte. Auf shuttleberg.com kommt nur der Einbau-Code (div + script) in einen HTML-Absatz.</div>
+<script>addEventListener('scroll',function(){document.body.classList.toggle('scrolled',scrollY>40);},{passive:true});</script>
+<script src="wetterwarte.js" defer></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # Shuttleberg Wetterwarte · Light
 # Stündlich: Open-Meteo-Daten aus AWS Open Data + GeoSphere + LWD Salzburg holen, Engine rechnen,
-# web/light (wetter-light.js, public.json, Vorschau) als statische Dateien zu Cloudflare hochladen.
+# web/light (wetter-light.js, public.json, wetterwarte.js, data/*.json für die interne Version, Vorschauen) als statische Dateien zu Cloudflare hochladen.
 # Geht ein Schritt schief, wird nichts hochgeladen: online bleibt der letzte gute Stand.
 # Benötigte Repo-Secrets: CLOUDFLARE_API_TOKEN (Vorlage „Edit Cloudflare Workers“), CLOUDFLARE_ACCOUNT_ID
 name: Wetter aktualisieren

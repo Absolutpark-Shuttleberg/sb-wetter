@@ -5,3 +5,4 @@ __pycache__/
 .claude/
 NOTIZEN-INTERN.md
 web/light/preview/local/
+web/light/data/

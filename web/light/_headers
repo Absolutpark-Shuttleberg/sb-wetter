@@ -16,3 +16,15 @@
 /wetter-light.js
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=600
+
+/data/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
+/wetterwarte.js
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=600
+
+/vendor/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
