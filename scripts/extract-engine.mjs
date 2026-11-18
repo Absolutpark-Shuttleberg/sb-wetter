@@ -30,7 +30,6 @@ core = core.replace("{signal:ctl.signal,cache:'no-store'}", '{signal:ctl.signal}
 
 const aval = [line('const PROB='), line('const LVL='), line('const elevTxt='), line('const strip=')].join('\n');
 const fc = between('function fcStats(', 'function renderFc(');
-const rule = line('function ruleOk(');
 
 const out = `// AUTOMATISCH ERZEUGT von scripts/extract-engine.mjs – nicht von Hand ändern.
 // Quelle: ${src.split('/').slice(-2).join('/')} · erzeugt ${new Date().toISOString()}
@@ -40,7 +39,6 @@ const document = globalThis.document || { getElementById: () => null };
 ${core}
 ${aval}
 ${fc}
-${rule}
 
 /* ======================= Export ======================= */
 export async function run(opts = {}) {
